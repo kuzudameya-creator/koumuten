@@ -25,3 +25,20 @@
     if (e.key === 'Escape') setOpen(false);
   });
 })();
+
+// 施工事例の絞り込み（works.html）
+(() => {
+  const buttons = document.querySelectorAll('.filter__btn');
+  const items = document.querySelectorAll('.works-archive__list li');
+  if (!buttons.length) return;
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      items.forEach((item) => {
+        item.hidden = filter !== 'all' && item.dataset.category !== filter;
+      });
+    });
+  });
+})();

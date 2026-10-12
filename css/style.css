@@ -190,9 +190,189 @@ p, h1, h2, h3 { margin: 0; }
 .footer__inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
 
 /* =========================
+   Common parts（下層ページ）
+========================= */
+.nav__list a[aria-current="page"] {
+  color: var(--color-green);
+  font-weight: 700;
+  border-bottom: 2px solid var(--color-green);
+  padding-bottom: 4px;
+}
+.text-link { justify-self: start; font-size: 14px; font-weight: 700; }
+
+/* ページ見出し */
+.page-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 320px;
+  overflow: hidden;
+}
+.page-head::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(36, 30, 24, .55);
+}
+.page-head__image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.page-head__inner { position: relative; z-index: 1; width: 100%; color: #FFF; }
+.page-head__sub { font-size: 13px; font-weight: 700; letter-spacing: .2em; color: #EBD9C2; }
+.page-head__title { font-size: clamp(30px, 3.6vw, 40px); font-weight: 900; }
+
+/* パンくず */
+.breadcrumb ol { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 16px 0; list-style: none; font-size: 13px; color: var(--color-text-sub); }
+.breadcrumb li + li::before { content: "/"; margin-right: 8px; }
+
+/* =========================
+   Feature page
+========================= */
+.intro {
+  max-width: 760px;
+  margin-inline: auto;
+  padding: 72px var(--pad-x) 40px;
+  display: grid;
+  gap: 20px;
+  text-align: center;
+}
+.intro__title { font-size: clamp(22px, 2.8vw, 30px); font-weight: 900; line-height: 1.6; }
+
+.points { display: grid; gap: 96px; padding-block: 56px 112px; }
+.point { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 56px; align-items: center; }
+.point--reverse .point__image { order: 2; }
+.point__image { aspect-ratio: 3 / 2; object-fit: cover; border-radius: 6px; }
+.point__body { display: grid; gap: 18px; }
+.point__num { font-size: 14px; font-weight: 700; color: var(--color-wood); }
+.point__title { font-size: clamp(22px, 2.4vw, 26px); font-weight: 900; line-height: 1.5; }
+
+.spec { display: grid; grid-template-columns: 7em 1fr; margin: 0; border-top: 1px solid var(--color-line); }
+.spec dt, .spec dd { margin: 0; padding: 12px 0; border-bottom: 1px solid var(--color-line); }
+.spec dt { font-size: 13px; color: var(--color-text-sub); }
+.spec dd { font-size: 14px; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chips li { padding: 6px 14px; font-size: 13px; background: var(--color-beige); border-radius: 999px; }
+
+.flow { background: var(--color-beige); }
+.flow__list { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.flow__list li {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 10px;
+  padding: 24px 16px;
+  text-align: center;
+  background: #FFF;
+  border-radius: 8px;
+}
+.flow__num {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  font-weight: 700;
+  color: #FFF;
+  background: var(--color-green);
+  border-radius: 50%;
+}
+.flow__title { font-weight: 700; }
+.flow__text { font-size: 13px; color: var(--color-text-sub); }
+
+/* =========================
+   Works page
+========================= */
+.works-archive { padding-block: 56px 112px; }
+.works-archive__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; margin-bottom: 40px; }
+.filter { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter__btn {
+  min-height: 44px;
+  padding: 0 20px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  background: #FFF;
+  border: 1px solid #D6CCBC;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background-color .2s, color .2s;
+}
+.filter__btn:hover { border-color: var(--color-green); }
+.filter__btn[aria-pressed="true"] { color: #FFF; background: var(--color-green); border-color: var(--color-green); }
+.works-archive__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 28px; }
+.works-archive__list li[hidden] { display: none; }
+.works__meta { font-size: 13px; color: var(--color-text-sub); }
+
+.pager { display: flex; justify-content: center; gap: 8px; margin-top: 56px; }
+.pager a {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  color: var(--color-text);
+  text-decoration: none;
+  background: #FFF;
+  border: 1px solid var(--color-line);
+  border-radius: 4px;
+}
+.pager a[aria-current="page"] { color: #FFF; font-weight: 700; background: var(--color-green); border-color: var(--color-green); }
+
+/* =========================
+   Company page
+========================= */
+.profile { background: var(--color-beige); }
+.profile__inner { max-width: 880px; margin-inline: auto; padding-inline: var(--pad-x); }
+.profile__title { margin-bottom: 40px; text-align: center; }
+.profile__table {
+  display: grid;
+  grid-template-columns: 160px minmax(0, 1fr);
+  margin: 0;
+  padding: 8px 40px;
+  background: #FFF;
+  border-radius: 8px;
+}
+.profile__table dt,
+.profile__table dd { margin: 0; padding: 18px 0; border-bottom: 1px solid var(--color-line); }
+.profile__table dt { font-size: 14px; font-weight: 700; color: var(--color-text-sub); }
+.profile__table dt:last-of-type,
+.profile__table dd:last-of-type { border-bottom: 0; }
+
+.staff__list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+.staff__card { display: grid; gap: 8px; align-content: start; }
+.staff__card img { aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px; margin-bottom: 4px; }
+.staff__role { font-size: 13px; font-weight: 700; color: var(--color-wood); }
+.staff__name { font-size: 20px; font-weight: 700; }
+.staff__card p:last-child { font-size: 14px; }
+
+.access { background: var(--color-beige); }
+.access__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr); gap: 48px; }
+.access__info { display: grid; gap: 12px; align-content: start; }
+.access__info .section-title { margin-bottom: 8px; }
+.access__map {
+  min-height: 340px;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-sub);
+  background: #DCD3C4;
+  border-radius: 8px;
+}
+
+/* =========================
    Responsive (〜900px)
 ========================= */
 @media (max-width: 900px) {
+  .page-head { height: 220px; }
+  .point,
+  .access__inner { grid-template-columns: 1fr; gap: 32px; }
+  .point--reverse .point__image { order: 0; }
+  .points { gap: 72px; }
+  .flow__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .works-archive__list,
+  .staff__list { grid-template-columns: 1fr; }
+  .profile__table { grid-template-columns: 1fr; padding: 8px 24px; }
+  .profile__table dt { padding-bottom: 0; border-bottom: 0; }
+  .profile__table dd { padding-top: 4px; }
+  .profile__table dd:last-of-type { border-bottom: 0; }
+
   :root { --header-h: 64px; }
 
   .header__logo { font-size: 18px; }
