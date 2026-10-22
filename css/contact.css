@@ -2,6 +2,9 @@
 /* =========================
    Contact form（contact.html 専用）
 ========================= */
+/* hidden属性の要素は必ず非表示（display指定より優先） */
+[hidden] { display: none !important; }
+
 :root {
   --color-error: #B3261E;
   --color-error-bg: #FCEEEE;
